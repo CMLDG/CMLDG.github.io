@@ -38,7 +38,7 @@
   nav a { margin-left: 1.2rem; color: var(--grey); text-decoration: none; }
 
   /* ---------- header with logo ---------- */
-  .header { display: flex; align-items: center; gap: 2rem; }
+  .header { display: flex; align-items: center; gap: 2rem; padding-top: 2rem;}
   .header .text { flex: 1; }
   .header p { color: var(--grey); font-size: 1.15rem; }
   .logo { width: 20rem; max-width: 45%; }
@@ -76,19 +76,12 @@
 <body>
 <div class="page">
 
-  <nav>
-    <a href="#next">Next meeting</a>
-    <a href="#about">About</a>
-    <a href="#archive">Archive</a>
-    <a href="#join">Join</a>
-  </nav>
 
   <!-- ================= HEADER ================= -->
   <div class="header">
     <div class="text">
       <h1>CMLDG</h1>
       <p>Chemical Machine Learning &amp; Discussion Group. We meet to talk about machine learning in the chemical sciences. Everyone is welcome, from beginners to experts.</p>
-      <a class="button" href="#join">Join the group</a>
     </div>
     <img class="logo" src="logo/CMLDG_logo.svg" alt="CMLDG logo: a camel">
   </div>
@@ -109,11 +102,11 @@
     </div>
   </section>
 
-  <!-- ================= ABOUT ================= -->
-  <section id="about">
-    <h2>About the group</h2>
-    <p>CMLDG started as a small discussion round inside our working group. We read papers, try out tools, and talk about problems where machine learning meets chemistry.</p>
-    <p>Each session has one topic and one moderator who guides the discussion. You do not need to present anything to take part.</p>
+  <!-- ================= JOIN ================= -->
+  <section id="join">
+    <h2>Participate</h2>
+    <p>Write to us to get the meeting invitations. If you want to moderate a session or suggest a topic, tell us in the same message.</p>
+    <p><a class="button" href="mailto:theodor.roehrkasten+cmldg@fau.de?subject=Join CMLDG">Send an email</a></p>
   </section>
 
   <!-- ================= ARCHIVE ================= -->
@@ -259,12 +252,6 @@
     </div>
   </section>
 
-  <!-- ================= JOIN ================= -->
-  <section id="join">
-    <h2>Join us</h2>
-    <p>Write to us to get the meeting invitations. If you want to moderate a session or suggest a topic, tell us in the same message.</p>
-    <p><a class="button" href="mailto:theodor.roehrkasten+cmldg@fau.de?subject=Join CMLDG">Send an email</a></p>
-  </section>
 
   <footer>CMLDG · Chemical Machine Learning &amp; Discussion Group</footer>
 
