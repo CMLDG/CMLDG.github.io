@@ -63,11 +63,14 @@
   th { color: var(--grey); }
 
   footer { border-top: 1px solid var(--line); padding: 2rem 0; color: var(--grey); }
+  .footer-logo { display: none; }
 
   /* ---------- phones ---------- */
   @media (max-width: 760px) {
     .header { flex-direction: column-reverse; align-items: flex-start; }
     .logo { display: none; }
+    .footer-logo { display: flex; justify-content: center; gap: 2rem; }
+    .footer-logo img { max-width: 30%; }
     h1 { font-size: 3rem; }
   }
 </style>
@@ -83,7 +86,7 @@
       <h1>CMLDG</h1>
       <p>Chemical Machine Learning &amp; Discussion Group. We meet to talk about machine learning in the chemical sciences. Everyone is welcome, from beginners to experts.</p>
     </div>
-    <img class="logo" src="logo/CMLDG_logo.svg" alt="CMLDG logo: a camel">
+    <img class="logo" src="logo/CMLDG_logo.svg" alt="The CaMeL-DoG is our mascot">
   </div>
 
   <!-- ================= NEXT MEETING ================= -->
@@ -251,7 +254,12 @@
   </section>
 
 
-  <footer>CMLDG · Chemical Machine Learning &amp; Discussion Group</footer>
+  <footer>
+    <div class="footer-logo">
+      <img src="logo/CMLDG_logo.svg" alt="The CaMeL-DoG is our mascot">
+    </div>
+    CMLDG · Chemical Machine Learning &amp; Discussion Group
+  </footer>
 
 </div>
 </body>
