@@ -4,197 +4,155 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CMLDG – Chemical Machine Learning & Discussion Group</title>
-<meta name="description" content="An open discussion group on machine learning in the chemical sciences.">
 <link rel="icon" href="logo/CMLDG_logo.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
-:root{
-  --bg:#f1f4f7; --surface:#ffffff; --ink:#101c26; --muted:#52626f; --line:#d3dce4;
-  --accent:#2b4be0; --accent-ink:#ffffff; --atom:#2fb88a;
-  --head:'Bricolage Grotesque',system-ui,sans-serif;
-  --body:'IBM Plex Sans',system-ui,sans-serif;
-}
-@media (prefers-color-scheme:dark){
-  :root{--bg:#0e1720; --surface:#16222d; --ink:#e8eef3; --muted:#9fb0bd; --line:#2a3a48; --accent:#7f95ff; --accent-ink:#0e1720; --atom:#4fd6a8}
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 var(--body)}
-a{color:var(--accent)}
-:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
-.wrap{max-width:62rem;margin:0 auto;padding:0 1.5rem}
-h1,h2,h3{font-family:var(--head);line-height:1.1;margin:0}
-h2{font-size:clamp(1.7rem,4vw,2.3rem);margin-bottom:1.5rem}
+  /* ---------- colors and fonts: change them here ---------- */
+  :root {
+    --bg: #f1f4f7;
+    --card: #ffffff;
+    --text: #101c26;
+    --grey: #52626f;
+    --line: #d3dce4;
+    --accent: #2b4be0;
+  }
 
-nav{display:flex;gap:1.5rem;justify-content:flex-end;padding:1.25rem 0;font-size:.95rem;flex-wrap:wrap}
-nav a{color:var(--muted);text-decoration:none}
-nav a:hover{color:var(--ink);text-decoration:underline}
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+  }
 
-/* hero */
-.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:2rem;align-items:center;padding:2rem 0 4rem}
-.hero h1{font-size:clamp(2.6rem,7vw,4.6rem);font-weight:700;letter-spacing:-.02em}
-.hero p{max-width:34rem;color:var(--muted);font-size:1.15rem;margin:1.25rem 0 2rem}
-.btn{display:inline-block;background:var(--accent);color:var(--accent-ink);padding:.8rem 1.4rem;border-radius:999px;text-decoration:none;font-weight:500}
-.btn:hover{filter:brightness(1.1)}
-.btn.ghost{background:none;color:var(--ink);border:1.5px solid var(--line);margin-left:.5rem}
-.mol{width:100%;max-width:40rem;justify-self:center}
-.mol line{stroke:var(--ink);stroke-width:3;stroke-linecap:round}
-.mol .dbl{stroke:var(--accent)}
-.mol circle{fill:var(--surface);stroke:var(--ink);stroke-width:3}
-.mol .n{fill:var(--atom);stroke:none}
-.mol .a{fill:var(--accent);stroke:none}
-.mol text{font:700 15px var(--head);fill:var(--ink)}
+  .page { max-width: 62rem; margin: 0 auto; padding: 0 1.5rem; }
+  h1, h2, h3 { margin: 0 0 1rem; line-height: 1.15; }
+  h1 { font-size: 4rem; }
+  h2 { font-size: 2rem; }
+  a { color: var(--accent); }
+  section { padding: 2.5rem 0; }
 
-section{padding:3rem 0}
+  /* ---------- top menu ---------- */
+  nav { text-align: right; padding: 1.2rem 0; }
+  nav a { margin-left: 1.2rem; color: var(--grey); text-decoration: none; }
 
-/* next meeting */
-.next{background:var(--surface);border:1.5px solid var(--ink);border-radius:14px;padding:2rem}
-.next h3{font-size:clamp(1.5rem,3.5vw,2.1rem);margin-bottom:1.5rem}
-.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:1.25rem;margin:0}
-.facts dt{font-size:.85rem;color:var(--muted);margin-bottom:.15rem}
-.facts dd{margin:0;font-weight:500}
-.empty{color:var(--muted)}
+  /* ---------- header with logo ---------- */
+  .header { display: flex; align-items: center; gap: 2rem; padding-bottom: 3rem; }
+  .header .text { flex: 1; }
+  .header p { color: var(--grey); font-size: 1.15rem; }
+  .logo { width: 30rem; max-width: 45%; }
 
-/* about */
-.about p{max-width:42rem}
+  .button {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.7rem 1.4rem;
+    border-radius: 999px;
+    text-decoration: none;
+  }
 
-/* archive */
-.tools{display:flex;gap:1rem;align-items:center;margin-bottom:1rem}
-.tools input{flex:1;max-width:22rem;padding:.65rem .9rem;border:1.5px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit}
-.tablebox{overflow-x:auto;border:1.5px solid var(--line);border-radius:12px;background:var(--surface)}
-table{width:100%;border-collapse:collapse;min-width:34rem}
-th,td{text-align:left;padding:.85rem 1.1rem;border-bottom:1px solid var(--line)}
-th{font-family:var(--head);font-size:.95rem;color:var(--muted)}
-tr:last-child td{border-bottom:0}
-td:first-child{font-weight:500}
-td.date{white-space:nowrap;color:var(--muted)}
+  /* ---------- next meeting card ---------- */
+  .card { background: var(--card); border: 2px solid var(--text); border-radius: 12px; padding: 1.5rem 2rem; }
+  .card p { margin: 0.4rem 0; }
 
-footer{border-top:1px solid var(--line);padding:2rem 0 3rem;color:var(--muted);font-size:.95rem}
+  /* ---------- archive table ---------- */
+  .table-wrap { overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: 12px; }
+  table { width: 100%; border-collapse: collapse; min-width: 32rem; }
+  th, td { text-align: left; padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); }
+  th { color: var(--grey); }
 
-@media (max-width:760px){
-  .hero{grid-template-columns:1fr}
-  .mol{max-width:14rem;order:-1;justify-self:start}
-  nav{justify-content:flex-start}
-}
+  footer { border-top: 1px solid var(--line); padding: 2rem 0; color: var(--grey); }
+
+  /* ---------- phones ---------- */
+  @media (max-width: 760px) {
+    .header { flex-direction: column-reverse; align-items: flex-start; }
+    .logo { max-width: 70%; }
+    h1 { font-size: 3rem; }
+  }
 </style>
 </head>
+
 <body>
-<div class="wrap">
-  <nav aria-label="Main">
+<div class="page">
+
+  <nav>
     <a href="#next">Next meeting</a>
     <a href="#about">About</a>
     <a href="#archive">Archive</a>
     <a href="#join">Join</a>
   </nav>
 
-  <header class="hero">
-    <div>
+  <!-- ================= HEADER ================= -->
+  <div class="header">
+    <div class="text">
       <h1>CMLDG</h1>
-      <p>Chemical Machine Learning &amp; Discussion Group. We meet to talk about machine learning in the chemical sciences. Everyone is welcome, from curious beginners to people who train models every day.</p>
-      <a class="btn" href="#join">Join the group</a><a class="btn ghost" href="#archive">Past discussions</a>
+      <p>Chemical Machine Learning &amp; Discussion Group. We meet to talk about machine learning in the chemical sciences. Everyone is welcome, from beginners to experts.</p>
+      <a class="button" href="#join">Join the group</a>
     </div>
-    <!-- logo -->
-    <img class="mol" src="logo/CMLDG_logo.svg" alt="CMLDG logo: a camel">  
-  </header>
+    <img class="logo" src="logo/CMLDG_logo.svg" alt="CMLDG logo: a camel">
+  </div>
 
-  <main>
-    <section id="next" aria-labelledby="next-h">
-      <h2 id="next-h">Next meeting</h2>
-      <div class="next" id="next-card"></div>
-    </section>
+  <!-- ================= NEXT MEETING ================= -->
+  <!-- Edit the text after each label. -->
+  <section id="next">
+    <h2>Next meeting</h2>
+    <div class="card">
+      <h3>Graph neural networks for molecular property prediction</h3>
+      <p><b>Date:</b> Thursday, 5 November 2026</p>
+      <p><b>Time:</b> 16:00</p>
+      <p><b>Place:</b> Seminar room 1.02, Chemistry building</p>
+      <p><b>Moderator:</b> Your Name</p>
+    </div>
+  </section>
 
-    <section id="about" class="about" aria-labelledby="about-h">
-      <h2 id="about-h">About the group</h2>
-      <p>CMLDG started as a small discussion round inside our working group. We read papers, try out tools, and talk through problems where machine learning meets chemistry: property prediction, molecular representations, reaction outcomes, force fields and more.</p>
-      <p>Now we are opening it up. Each session has one topic and one moderator who guides the discussion. You do not need to present anything to take part.</p>
-    </section>
+  <!-- ================= ABOUT ================= -->
+  <section id="about">
+    <h2>About the group</h2>
+    <p>CMLDG started as a small discussion round inside our working group. We read papers, try out tools, and talk about problems where machine learning meets chemistry.</p>
+    <p>Each session has one topic and one moderator who guides the discussion. You do not need to present anything to take part.</p>
+  </section>
 
-    <section id="archive" aria-labelledby="arch-h">
-      <h2 id="arch-h">Archive of past discussions</h2>
-      <div class="tools">
-        <input id="q" type="search" placeholder="Search by topic or moderator" aria-label="Search the archive">
-        <span id="count" class="empty"></span>
-      </div>
-      <div class="tablebox">
-        <table>
-          <thead><tr><th scope="col">Topic</th><th scope="col">Date</th><th scope="col">Moderator</th></tr></thead>
-          <tbody id="rows"></tbody>
-        </table>
-      </div>
-    </section>
+  <!-- ================= ARCHIVE ================= -->
+  <!-- To add a discussion: copy one <tr>...</tr> block and paste it
+       directly under the header row, so the newest is on top. -->
+  <section id="archive">
+    <h2>Archive of past discussions</h2>
+    <div class="table-wrap">
+      <table>
+        <tr>
+          <th>Topic</th>
+          <th>Date</th>
+          <th>Moderator</th>
+        </tr>
+        <tr>
+          <td>Machine-learned interatomic potentials: where do they fail?</td>
+          <td>24 Sep 2026</td>
+          <td>Name A</td>
+        </tr>
+        <tr>
+          <td>Representing molecules: fingerprints, SMILES and graphs</td>
+          <td>20 Aug 2026</td>
+          <td>Name B</td>
+        </tr>
+        <tr>
+          <td>Introduction to ML in chemistry</td>
+          <td>16 Jul 2026</td>
+          <td>Name C</td>
+        </tr>
+      </table>
+    </div>
+  </section>
 
-    <section id="join" aria-labelledby="join-h">
-      <h2 id="join-h">Join us</h2>
-      <p>Write to us to get the meeting invitations and be added to the mailing list. If you want to moderate a session or suggest a topic, tell us in the same message.</p>
-      <p><a class="btn" id="mail" href="#">Send an email</a></p>
-    </section>
-  </main>
+  <!-- ================= JOIN ================= -->
+  <section id="join">
+    <h2>Join us</h2>
+    <p>Write to us to get the meeting invitations. If you want to moderate a session or suggest a topic, tell us in the same message.</p>
+    <p><a class="button" href="mailto:cmldg@example.org?subject=Join CMLDG">Send an email</a></p>
+  </section>
 
-  <footer>
-    CMLDG · Chemical Machine Learning &amp; Discussion Group
-  </footer>
+  <footer>CMLDG · Chemical Machine Learning &amp; Discussion Group</footer>
+
 </div>
-
-<script>
-/* ============ EDIT YOUR CONTENT HERE ============ */
-const CONTACT_EMAIL = "cmldg@example.org";   // <- put your real contact address
-
-// Set to null if no meeting is planned yet.
-const NEXT_MEETING = {
-  topic: "Graph neural networks for molecular property prediction",
-  date: "2026-11-05",          // YYYY-MM-DD
-  time: "16:00",               // 24h
-  place: "Seminar room 1.02, Chemistry building (or via Zoom: link on request)",
-  moderator: "Your Name"
-};
-
-// Newest first. Add a new line for every finished discussion.
-const ARCHIVE = [
-  { topic: "Machine-learned interatomic potentials: where do they fail?", date: "2026-09-24", moderator: "Name A" },
-  { topic: "Representing molecules: fingerprints, SMILES and graphs",     date: "2026-08-20", moderator: "Name B" },
-  { topic: "Introduction to ML in chemistry: what do we want from this group?", date: "2026-07-16", moderator: "Name C" }
-];
-/* ================================================ */
-
-const fmtDate = iso => new Date(iso + "T12:00:00").toLocaleDateString("en-GB",
-  { day: "numeric", month: "long", year: "numeric" });
-const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]));
-
-// next meeting
-const card = document.getElementById("next-card");
-if (NEXT_MEETING) {
-  const d = new Date(NEXT_MEETING.date + "T12:00:00");
-  const weekday = d.toLocaleDateString("en-GB", { weekday: "long" });
-  card.innerHTML = `
-    <h3>${esc(NEXT_MEETING.topic)}</h3>
-    <dl class="facts">
-      <div><dt>Date</dt><dd>${weekday}, ${fmtDate(NEXT_MEETING.date)}</dd></div>
-      <div><dt>Time</dt><dd>${esc(NEXT_MEETING.time)}</dd></div>
-      <div><dt>Place</dt><dd>${esc(NEXT_MEETING.place)}</dd></div>
-      <div><dt>Moderator</dt><dd>${esc(NEXT_MEETING.moderator)}</dd></div>
-    </dl>`;
-} else {
-  card.innerHTML = `<p class="empty">The next meeting is not scheduled yet. Join the mailing list to hear about it first.</p>`;
-}
-
-// archive
-const rows = document.getElementById("rows"), count = document.getElementById("count");
-function renderArchive(filter = "") {
-  const f = filter.trim().toLowerCase();
-  const list = ARCHIVE.filter(r => (r.topic + " " + r.moderator).toLowerCase().includes(f));
-  rows.innerHTML = list.length
-    ? list.map(r => `<tr><td>${esc(r.topic)}</td><td class="date">${fmtDate(r.date)}</td><td>${esc(r.moderator)}</td></tr>`).join("")
-    : `<tr><td colspan="3" class="empty">No discussions match your search.</td></tr>`;
-  count.textContent = `${list.length} of ${ARCHIVE.length}`;
-}
-document.getElementById("q").addEventListener("input", e => renderArchive(e.target.value));
-renderArchive();
-
-// contact
-document.getElementById("mail").href =
-  `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Join CMLDG")}`;
-</script>
 </body>
-</html>  
+</html>
