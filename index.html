@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CMLDG – Chemical Machine Learning & Discussion Group</title>
+<meta name="description" content="An open discussion group on machine learning in the chemical sciences.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚗️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f1f4f7; --surface:#ffffff; --ink:#101c26; --muted:#52626f; --line:#d3dce4;
+  --accent:#2b4be0; --accent-ink:#ffffff; --atom:#2fb88a;
+  --head:'Bricolage Grotesque',system-ui,sans-serif;
+  --body:'IBM Plex Sans',system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0e1720; --surface:#16222d; --ink:#e8eef3; --muted:#9fb0bd; --line:#2a3a48; --accent:#7f95ff; --accent-ink:#0e1720; --atom:#4fd6a8}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 var(--body)}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:62rem;margin:0 auto;padding:0 1.5rem}
+h1,h2,h3{font-family:var(--head);line-height:1.1;margin:0}
+h2{font-size:clamp(1.7rem,4vw,2.3rem);margin-bottom:1.5rem}
+
+nav{display:flex;gap:1.5rem;justify-content:flex-end;padding:1.25rem 0;font-size:.95rem;flex-wrap:wrap}
+nav a{color:var(--muted);text-decoration:none}
+nav a:hover{color:var(--ink);text-decoration:underline}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:2rem;align-items:center;padding:2rem 0 4rem}
+.hero h1{font-size:clamp(2.6rem,7vw,4.6rem);font-weight:700;letter-spacing:-.02em}
+.hero p{max-width:34rem;color:var(--muted);font-size:1.15rem;margin:1.25rem 0 2rem}
+.btn{display:inline-block;background:var(--accent);color:var(--accent-ink);padding:.8rem 1.4rem;border-radius:999px;text-decoration:none;font-weight:500}
+.btn:hover{filter:brightness(1.1)}
+.btn.ghost{background:none;color:var(--ink);border:1.5px solid var(--line);margin-left:.5rem}
+.mol{width:100%;max-width:22rem;justify-self:center}
+.mol line{stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+.mol .dbl{stroke:var(--accent)}
+.mol circle{fill:var(--surface);stroke:var(--ink);stroke-width:3}
+.mol .n{fill:var(--atom);stroke:none}
+.mol .a{fill:var(--accent);stroke:none}
+.mol text{font:700 15px var(--head);fill:var(--ink)}
+
+section{padding:3rem 0}
+
+/* next meeting */
+.next{background:var(--surface);border:1.5px solid var(--ink);border-radius:14px;padding:2rem}
+.next h3{font-size:clamp(1.5rem,3.5vw,2.1rem);margin-bottom:1.5rem}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:1.25rem;margin:0}
+.facts dt{font-size:.85rem;color:var(--muted);margin-bottom:.15rem}
+.facts dd{margin:0;font-weight:500}
+.empty{color:var(--muted)}
+
+/* about */
+.about p{max-width:42rem}
+
+/* archive */
+.tools{display:flex;gap:1rem;align-items:center;margin-bottom:1rem}
+.tools input{flex:1;max-width:22rem;padding:.65rem .9rem;border:1.5px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit}
+.tablebox{overflow-x:auto;border:1.5px solid var(--line);border-radius:12px;background:var(--surface)}
+table{width:100%;border-collapse:collapse;min-width:34rem}
+th,td{text-align:left;padding:.85rem 1.1rem;border-bottom:1px solid var(--line)}
+th{font-family:var(--head);font-size:.95rem;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:500}
+td.date{white-space:nowrap;color:var(--muted)}
+
+footer{border-top:1px solid var(--line);padding:2rem 0 3rem;color:var(--muted);font-size:.95rem}
+
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr}
+  .mol{max-width:14rem;order:-1;justify-self:start}
+  nav{justify-content:flex-start}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav aria-label="Main">
+    <a href="#next">Next meeting</a>
+    <a href="#about">About</a>
+    <a href="#archive">Archive</a>
+    <a href="#join">Join</a>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <h1>CMLDG</h1>
+      <p>Chemical Machine Learning &amp; Discussion Group. We meet to talk about machine learning in the chemical sciences. Everyone is welcome, from curious beginners to people who train models every day.</p>
+      <a class="btn" href="#join">Join the group</a><a class="btn ghost" href="#archive">Past discussions</a>
+    </div>
+    <!-- decorative molecule graph: a ring whose nodes are atoms, like a molecular graph -->
+    <svg class="mol" viewBox="0 0 320 300" role="img" aria-label="Illustration of a molecular graph">
+      <line x1="160" y1="70" x2="225" y2="108"/>
+      <line class="dbl" x1="225" y1="108" x2="225" y2="184"/>
+      <line x1="225" y1="184" x2="160" y2="222"/>
+      <line class="dbl" x1="160" y1="222" x2="95" y2="184"/>
+      <line x1="95" y1="184" x2="95" y2="108"/>
+      <line class="dbl" x1="95" y1="108" x2="160" y2="70"/>
+      <line x1="160" y1="70" x2="160" y2="22"/>
+      <line x1="225" y1="184" x2="282" y2="214"/>
+      <line x1="95" y1="184" x2="38" y2="214"/>
+      <circle class="n" cx="160" cy="70" r="14"/>
+      <circle cx="225" cy="108" r="12"/><circle cx="225" cy="184" r="12"/>
+      <circle cx="160" cy="222" r="12"/><circle cx="95" cy="184" r="12"/><circle cx="95" cy="108" r="12"/>
+      <circle class="a" cx="160" cy="22" r="14"/>
+      <circle class="a" cx="282" cy="214" r="14"/>
+      <circle class="a" cx="38" cy="214" r="14"/>
+    </svg>
+  </header>
+
+  <main>
+    <section id="next" aria-labelledby="next-h">
+      <h2 id="next-h">Next meeting</h2>
+      <div class="next" id="next-card"></div>
+    </section>
+
+    <section id="about" class="about" aria-labelledby="about-h">
+      <h2 id="about-h">About the group</h2>
+      <p>CMLDG started as a small discussion round inside our working group. We read papers, try out tools, and talk through problems where machine learning meets chemistry: property prediction, molecular representations, reaction outcomes, force fields and more.</p>
+      <p>Now we are opening it up. Each session has one topic and one moderator who guides the discussion. You do not need to present anything to take part.</p>
+    </section>
+
+    <section id="archive" aria-labelledby="arch-h">
+      <h2 id="arch-h">Archive of past discussions</h2>
+      <div class="tools">
+        <input id="q" type="search" placeholder="Search by topic or moderator" aria-label="Search the archive">
+        <span id="count" class="empty"></span>
+      </div>
+      <div class="tablebox">
+        <table>
+          <thead><tr><th scope="col">Topic</th><th scope="col">Date</th><th scope="col">Moderator</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="join" aria-labelledby="join-h">
+      <h2 id="join-h">Join us</h2>
+      <p>Write to us to get the meeting invitations and be added to the mailing list. If you want to moderate a session or suggest a topic, tell us in the same message.</p>
+      <p><a class="btn" id="mail" href="#">Send an email</a></p>
+    </section>
+  </main>
+
+  <footer>
+    CMLDG · Chemical Machine Learning &amp; Discussion Group
+  </footer>
+</div>
+
+<script>
+/* ============ EDIT YOUR CONTENT HERE ============ */
+const CONTACT_EMAIL = "cmldg@example.org";   // <- put your real contact address
+
+// Set to null if no meeting is planned yet.
+const NEXT_MEETING = {
+  topic: "Graph neural networks for molecular property prediction",
+  date: "2026-11-05",          // YYYY-MM-DD
+  time: "16:00",               // 24h
+  place: "Seminar room 1.02, Chemistry building (or via Zoom: link on request)",
+  moderator: "Your Name"
+};
+
+// Newest first. Add a new line for every finished discussion.
+const ARCHIVE = [
+  { topic: "Machine-learned interatomic potentials: where do they fail?", date: "2026-09-24", moderator: "Name A" },
+  { topic: "Representing molecules: fingerprints, SMILES and graphs",     date: "2026-08-20", moderator: "Name B" },
+  { topic: "Introduction to ML in chemistry: what do we want from this group?", date: "2026-07-16", moderator: "Name C" }
+];
+/* ================================================ */
+
+const fmtDate = iso => new Date(iso + "T12:00:00").toLocaleDateString("en-GB",
+  { day: "numeric", month: "long", year: "numeric" });
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]));
+
+// next meeting
+const card = document.getElementById("next-card");
+if (NEXT_MEETING) {
+  const d = new Date(NEXT_MEETING.date + "T12:00:00");
+  const weekday = d.toLocaleDateString("en-GB", { weekday: "long" });
+  card.innerHTML = `
+    <h3>${esc(NEXT_MEETING.topic)}</h3>
+    <dl class="facts">
+      <div><dt>Date</dt><dd>${weekday}, ${fmtDate(NEXT_MEETING.date)}</dd></div>
+      <div><dt>Time</dt><dd>${esc(NEXT_MEETING.time)}</dd></div>
+      <div><dt>Place</dt><dd>${esc(NEXT_MEETING.place)}</dd></div>
+      <div><dt>Moderator</dt><dd>${esc(NEXT_MEETING.moderator)}</dd></div>
+    </dl>`;
+} else {
+  card.innerHTML = `<p class="empty">The next meeting is not scheduled yet. Join the mailing list to hear about it first.</p>`;
+}
+
+// archive
+const rows = document.getElementById("rows"), count = document.getElementById("count");
+function renderArchive(filter = "") {
+  const f = filter.trim().toLowerCase();
+  const list = ARCHIVE.filter(r => (r.topic + " " + r.moderator).toLowerCase().includes(f));
+  rows.innerHTML = list.length
+    ? list.map(r => `<tr><td>${esc(r.topic)}</td><td class="date">${fmtDate(r.date)}</td><td>${esc(r.moderator)}</td></tr>`).join("")
+    : `<tr><td colspan="3" class="empty">No discussions match your search.</td></tr>`;
+  count.textContent = `${list.length} of ${ARCHIVE.length}`;
+}
+document.getElementById("q").addEventListener("input", e => renderArchive(e.target.value));
+renderArchive();
+
+// contact
+document.getElementById("mail").href =
+  `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Join CMLDG")}`;
+</script>
+</body>
+</html>  
